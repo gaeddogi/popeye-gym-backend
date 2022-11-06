@@ -23,15 +23,16 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 
     @Override
     public List<Reservation> findScheduleOfTrainer (Long trainerId, LocalDate startDt, LocalDate endDt) {
-        return jpaQueryFactory
-                .select(reservation)
-                .from(reservation)
-                .where(
-                        trainer.id.eq(trainerId),
-                        reservation.status.eq(ReservationStatus.RESERVATION),
-                        reservation.trainingDt.between(startDt, endDt)
-                )
-                .fetch();
+//        return jpaQueryFactory
+//                .select(reservation)
+//                .from(reservation)
+//                .where(
+//                        trainer.id.eq(trainerId),
+//                        reservation.status.eq(ReservationStatus.RESERVATION),
+//                        reservation.trainingDt.between(startDt, endDt)
+//                )
+//                .fetch();
+        return null;
 
 //        startDt.atStartOfDay(), LocalDateTime.of(endDt, LocalTime.MAX).withNano(0)
 //        LocalDateTime.of(searchParams.endDate, LocalTime.MAX).withNano(0)

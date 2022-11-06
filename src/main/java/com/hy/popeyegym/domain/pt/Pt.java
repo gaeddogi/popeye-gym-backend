@@ -52,16 +52,15 @@ public class Pt {
     /**
      * pt 예약
      *
-     * quantity가 있으면 파라미터만큼 감소 -> true 반환
+     * quantity가 있으면 -1 한 뒤에 -> true 반환
      * 남은 quantity 없으면 -> false 반환
      */
-    public boolean minus(int quantity) {
-        int remaining = this.quantity - quantity;
-        if (remaining < 0) return false;
-        else {
-            this.quantity = remaining;
-            return true;
+    public boolean minus() {
+        if (quantity <= 0) {
+            return false;
         }
+        --quantity;
+        return true;
     }
 
     /**

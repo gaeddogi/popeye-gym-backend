@@ -5,7 +5,7 @@ import com.hy.popeyegym.domain.reservation.Reservation;
 import com.hy.popeyegym.domain.trainer.Trainer;
 import com.hy.popeyegym.domain.user.User;
 import com.hy.popeyegym.exception.CustomException;
-import com.hy.popeyegym.exception.exceptionType.ReservationErrorType;
+import com.hy.popeyegym.exception.exceptionType.ReservationType;
 import com.hy.popeyegym.exception.exceptionType.TrainerExceptionType;
 import com.hy.popeyegym.exception.exceptionType.UserExceptionType;
 import com.hy.popeyegym.repository.pt.PtRepository;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,12 +40,10 @@ public class ReservationService {
      * pt 예약
      */
     @Transactional
-    public List<Long> reservation(Long userId, ReservationReq req) {
+    public Long reservation(Long userId, ReservationReq req) {
 
         Long trainerId = req.getTrainerId();
-        List<Date> dates = req.getReservationDates();
-//        LocalDate trainingDt = dto.getTrainingDt();
-//        int startTime = dto.getStartTime();
+        LocalDateTime dateTime = req.getDateTime();
 
         // 엔티티 조회
         User user = userRepository.findById(userId)
@@ -52,26 +51,26 @@ public class ReservationService {
         Trainer trainer = trainerRepository.findById(trainerId)
                 .orElseThrow(() -> new CustomException(TrainerExceptionType.NOT_FOUND_TRAINER));
 
+        // 해당 날짜에 대한 트레이너 스케줄이 비어있는지 확인
+        boolean present = reservationRepository.findByTrainerIdAndDateTime(trainerId, dateTime).isPresent();
+        if (present) throw new CustomException(ReservationType.ALREADY_RESERVED);
+
         // pt권 확인
         Pt pt = ptRepository.findByUserIdAndTrainerId(userId, trainerId)
-                .orElseThrow(() -> new CustomException(ReservationErrorType.NOT_ENROLL_PT));
+                .orElseThrow(() -> new CustomException(ReservationType.NOT_ENROLL_PT));
 
-        boolean isRemaining = pt.minus(dates.size());
+        boolean isRemaining = pt.minus();
         if (!isRemaining) {
-            throw new CustomException(ReservationErrorType.NOT_REMAINING);
+            throw new CustomException(ReservationType.NOT_REMAINING);
         }
 
         // 예약 생성
-        List<Reservation> reservations = dates.stream()
-                .map(d -> {
-                    return Reservation.create(user, trainer, d.getDate(), d.getTime());
-                })
-                .collect(Collectors.toList());
+        Reservation reservation = Reservation.create(user, trainer, dateTime);
 
         // 예약 저장
-        reservationRepository.saveAll(reservations);
+        reservationRepository.save(reservation);
 
-        return reservations.stream().map(r -> r.getId()).collect(Collectors.toList());
+        return reservation.getId();
     }
 
     /**
@@ -88,10 +87,10 @@ public class ReservationService {
 //            reservations.add(reservation);
 //        }
         Reservation reservation = reservationRepository.findByIdAndUserId(dto.getReservationId(), dto.getUserId())
-                .orElseThrow(() -> new CustomException(ReservationErrorType.NOT_CANCEL));
+                .orElseThrow(() -> new CustomException(ReservationType.NOT_CANCEL));
 
         Pt pt = ptRepository.findByUserIdAndTrainerId(dto.getUserId(), reservation.getTrainer().getId())
-                .orElseThrow(() -> new CustomException(ReservationErrorType.NOT_ENROLL_PT));
+                .orElseThrow(() -> new CustomException(ReservationType.NOT_ENROLL_PT));
 
         // 예약상태 reservation -> cancel
         // completed나 in_process나 cancel인 것은 넘어오면 안되는데, 넘어오더라도 그것은 무시한다.
@@ -104,31 +103,31 @@ public class ReservationService {
     /**
      * 트레이너의 예약 스케줄을 가져온다
      */
-    public GetScheduleOfTrainerRes getScheduleOfTrainer(Long userId, Long trainerId, getScheduleOfTrainerReq req) {
-
-        LocalDate today = LocalDate.now();
-        LocalDate startDt = req.getStartDt();
-        if (today.isAfter(startDt)) startDt = today;
-
-        List<Reservation> scheduleOfTrainer =
-                reservationRepository.findScheduleOfTrainer(trainerId, startDt, req.getEndDt());
-
-        List<ScheduleDetails> scheduleDetails =
-                scheduleOfTrainer.stream()
-                .map(o -> {
-                    return ScheduleDetails.builder()
-                            .date(o.getTrainingDt())
-                            .time(o.getStartTime())
-                            .isMine(o.getUser().getId() == userId ? true: false)
-                            .build();
-                })
-                .collect(Collectors.toList());
-
-        return GetScheduleOfTrainerRes.builder()
-                .trainerId(trainerId)
-                .scheduleDetails(scheduleDetails)
-                .build();
-    }
+//    public GetScheduleOfTrainerRes getScheduleOfTrainer(Long userId, Long trainerId, getScheduleOfTrainerReq req) {
+//
+//        LocalDate today = LocalDate.now();
+//        LocalDate startDt = req.getStartDt();
+//        if (today.isAfter(startDt)) startDt = today;
+//
+//        List<Reservation> scheduleOfTrainer =
+//                reservationRepository.findScheduleOfTrainer(trainerId, startDt, req.getEndDt());
+//
+//        List<ScheduleDetails> scheduleDetails =
+//                scheduleOfTrainer.stream()
+//                .map(o -> {
+//                    return ScheduleDetails.builder()
+//                            .date(o.getTrainingDt())
+//                            .time(o.getStartTime())
+//                            .isMine(o.getUser().getId() == userId ? true: false)
+//                            .build();
+//                })
+//                .collect(Collectors.toList());
+//
+//        return GetScheduleOfTrainerRes.builder()
+//                .trainerId(trainerId)
+//                .scheduleDetails(scheduleDetails)
+//                .build();
+//    }
 
 
 

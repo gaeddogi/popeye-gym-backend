@@ -35,15 +35,14 @@ public class ReservationController {
             ) {
 
         System.out.println(req);
-        reservationService.reservation(user.getUser().getId(), req);
+        Long reservationId = reservationService.reservation(user.getUser().getId(), req);
 
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(reservationId)
-//                .toUri();
-//
-//        return ResponseEntity.created(location).body(new ReservationRes(reservationId));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(reservationId)
+                .toUri();
+
+        return ResponseEntity.created(location).body(new ReservationRes(reservationId));
     }
 
     /**
@@ -63,16 +62,16 @@ public class ReservationController {
         return ResponseEntity.ok().build();
     }
 
-    /**
-     * 트레이너 예약된 스케줄
-     */
-    @GetMapping("reservations/trainers/{trainerId}")
-    public GetScheduleOfTrainerRes getScheduleOfTrainer(
-            @PathVariable(name = "trainerId") Long trainerId,
-            @ModelAttribute getScheduleOfTrainerReq req,
-            @AuthenticationPrincipal PrincipalDetails user
-    ) {
-        return reservationService.getScheduleOfTrainer(user.getUser().getId(), trainerId, req);
-    }
+//    /**
+//     * 트레이너 예약된 스케줄
+//     */
+//    @GetMapping("reservations/trainers/{trainerId}")
+//    public GetScheduleOfTrainerRes getScheduleOfTrainer(
+//            @PathVariable(name = "trainerId") Long trainerId,
+//            @ModelAttribute getScheduleOfTrainerReq req,
+//            @AuthenticationPrincipal PrincipalDetails user
+//    ) {
+//        return reservationService.getScheduleOfTrainer(user.getUser().getId(), trainerId, req);
+//    }
 
 }

@@ -26,27 +26,24 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
-    private LocalDate trainingDt; // 수업일
-    private int startTime;
+    private LocalDateTime dateTime; // 수업일
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private Reservation(User user, Trainer trainer, LocalDate trainingDt, int startTime, ReservationStatus status) {
+    private Reservation(User user, Trainer trainer, LocalDateTime dateTime, ReservationStatus status) {
         this.user = user;
         this.trainer = trainer;
-        this.trainingDt = trainingDt;
-        this.startTime = startTime;
+        this.dateTime = dateTime;
         this.status = status;
     }
 
     /*생성 메서드*/
-    public static Reservation create(User user, Trainer trainer, LocalDate trainingDt, int startTime) {
+    public static Reservation create(User user, Trainer trainer, LocalDateTime dateTime) {
         return Reservation.builder()
                 .user(user)
                 .trainer(trainer)
-                .trainingDt(trainingDt)
-                .startTime(startTime)
+                .dateTime(dateTime)
                 .status(ReservationStatus.RESERVATION)
                 .build();
     }
