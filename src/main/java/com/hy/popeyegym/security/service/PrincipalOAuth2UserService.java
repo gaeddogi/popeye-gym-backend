@@ -7,6 +7,7 @@ import com.hy.popeyegym.exception.exceptionType.UserExceptionType;
 import com.hy.popeyegym.repository.user.UserRepository;
 import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.provider.GoogleOAuth2UserInfo;
+import com.hy.popeyegym.security.provider.KakaoOAuth2UserInfo;
 import com.hy.popeyegym.security.provider.NaverOAuth2UserInfo;
 import com.hy.popeyegym.security.provider.OAuth2UserInfo;
 import lombok.RequiredArgsConstructor;
@@ -57,13 +58,16 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
     private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
 
         // 사용자 정보를 담는다.
-        String registrationId = oAuth2UserRequest.getClientRegistration().getRegistrationId();
-
         OAuth2UserInfo oAuth2UserInfo = null;
+
+        String registrationId = oAuth2UserRequest.getClientRegistration().getRegistrationId();
+        log.info("registrationId: {}", registrationId);
         if (registrationId.equals("google")) {
             oAuth2UserInfo = new GoogleOAuth2UserInfo(oAuth2User.getAttributes());
         } else if (registrationId.equals("naver")) {
             oAuth2UserInfo = new NaverOAuth2UserInfo((Map) oAuth2User.getAttributes().get("response"));
+        } else if (registrationId.equals("kakao")) {
+            oAuth2UserInfo = new KakaoOAuth2UserInfo((Map) oAuth2User.getAttributes());
         }
 
         // 필수값인 이메일이 없다면 익셉션 던짐
