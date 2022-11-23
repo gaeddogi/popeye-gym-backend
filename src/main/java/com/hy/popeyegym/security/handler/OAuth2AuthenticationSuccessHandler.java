@@ -66,11 +66,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             HttpServletResponse response,
             Authentication authentication
     ) throws IOException, ServletException {
-        log.info("=======OAuth2AuthenticationSuccessHandler: {}", request.getQueryString());
+        log.info("OAuth2AuthenticationSuccessHandler: {}", request.getQueryString());
 
         // 쿠키로부터 targetUrl 가져오기
         String targetUrl = determineTargetUrl(request, response, authentication);
-        log.info("=======targetUrl: {}", targetUrl);
+        log.info("targetUrl: {}", targetUrl);
 
         if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
@@ -119,7 +119,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         CookieUtils.addCookie(response, REFRESH_TOKEN, refreshToken, (int)REFRESH_TOKEN_EXPIRE_TIME / 60); // 쿠키 만료시간 정하기
 
         return UriComponentsBuilder.fromUriString(targetUrl)
-                .queryParam("id", principal.getUser().getId())
+//                .queryParam("id", principal.getUser().getId())
                 .queryParam("token", accessToken)
                 .build().toUriString();
     }

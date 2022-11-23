@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 import static com.hy.popeyegym.dto.request.EnrollRequestDto.*;
 import static com.hy.popeyegym.dto.response.EnrollResponseDto.*;
@@ -22,27 +23,13 @@ public class EnrollController {
 
     private final EnrollService enrollService;
 
-    @GetMapping("test")
-    public void test(@AuthenticationPrincipal PrincipalDetails user) {
-        System.out.println("=====user: " + user);
-    }
-
     /**
-     * pt 등록
+     * 등록된 트레이너 정보 가져오기
      */
-    @PostMapping("enrolls")
-    public ResponseEntity<EnrollSignUpResponseDto> enroll(
-            @RequestBody EnrollSignUpRequestDto enrollSignUpDto,
+    @GetMapping("enrolls")
+    public List<GetTrainersRes> getTrainers(
             @AuthenticationPrincipal PrincipalDetails user
-            ) {
-
-        Long enrollId = enrollService.enroll(enrollSignUpDto);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(enrollId)
-                .toUri();
-
-        return ResponseEntity.created(location).body(new EnrollSignUpResponseDto(enrollId));
+    ) {
+        return enrollService.getTrainers(user.getUser().getId());
     }
 }

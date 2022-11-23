@@ -23,16 +23,7 @@ public class PtService {
 
     private final PtRepository ptRepository;
 
-    public List<GetUserPtInfo> getUserPtInfo(Long id) {
-        List<Tuple> ptTrainers = ptRepository.getPtTrainers(id);
-
-        return ptTrainers.stream().map(tuple -> {
-                    return GetUserPtInfo.builder()
-                            .trainerId(tuple.get(trainer).getId())
-                            .name(tuple.get(trainer).getName())
-                            .quantity(tuple.get(pt).getQuantity())
-                            .build();
-                })
-                .collect(Collectors.toList());
+    public List<GetUserPtInfoRes> getUserPtInfo(Long id) {
+        return ptRepository.getPtTrainers(id);
     }
 }

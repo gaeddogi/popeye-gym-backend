@@ -4,6 +4,7 @@ import com.hy.popeyegym.domain.enroll.Enroll;
 import com.hy.popeyegym.domain.pt.Pt;
 import com.hy.popeyegym.domain.trainer.Trainer;
 import com.hy.popeyegym.domain.user.User;
+import com.hy.popeyegym.dto.response.EnrollResponseDto;
 import com.hy.popeyegym.exception.CustomException;
 import com.hy.popeyegym.exception.exceptionType.TrainerExceptionType;
 import com.hy.popeyegym.exception.exceptionType.UserExceptionType;
@@ -15,9 +16,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.hy.popeyegym.dto.request.EnrollRequestDto.*;
+import static com.hy.popeyegym.dto.response.EnrollResponseDto.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -54,5 +57,9 @@ public class EnrollService {
         enrollRepository.save(enroll);
 
         return enroll.getId();
+    }
+
+    public List<GetTrainersRes> getTrainers(Long userId) {
+        return enrollRepository.getTrainers(userId);
     }
 }

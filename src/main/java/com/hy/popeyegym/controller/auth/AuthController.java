@@ -1,12 +1,17 @@
 package com.hy.popeyegym.controller.auth;
 
 import com.hy.popeyegym.dto.response.AuthResponseDto;
+import com.hy.popeyegym.exception.CustomException;
+import com.hy.popeyegym.exception.exceptionType.AuthExceptionType;
 import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.util.HeaderUtils;
 import com.hy.popeyegym.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,4 +36,5 @@ public class AuthController {
 
         return ReissueRes.builder().token(newAccessToken).build();
     }
+
 }

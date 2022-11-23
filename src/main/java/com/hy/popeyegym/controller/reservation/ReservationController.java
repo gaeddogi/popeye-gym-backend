@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.hy.popeyegym.dto.request.ReservationRequestDto.*;
 import static com.hy.popeyegym.dto.response.ReservationResponseDto.*;
@@ -47,31 +48,40 @@ public class ReservationController {
 
     /**
      * 예약 취소
-     * @param id
-     * @param reserCancelRequestDto
-     * @return
      */
     @PostMapping("reservations/{id}")
     public ResponseEntity cancel(
-            @PathVariable(name = "id") Long id,
-            @RequestBody ReserCancelRequestDto reserCancelRequestDto
+            @PathVariable(name = "id") Long reservationId,
+            @AuthenticationPrincipal PrincipalDetails user
     ) {
-        reserCancelRequestDto.setReservationId(id);
-        reservationService.cancel(reserCancelRequestDto);
+//        reserCancelRequestDto.setReservationId(id);
+
+        System.out.println("예약취소: " + reservationId);
+        reservationService.cancel(user.getUser().getId(), reservationId);
 
         return ResponseEntity.ok().build();
     }
 
-//    /**
-//     * 트레이너 예약된 스케줄
-//     */
-//    @GetMapping("reservations/trainers/{trainerId}")
-//    public GetScheduleOfTrainerRes getScheduleOfTrainer(
-//            @PathVariable(name = "trainerId") Long trainerId,
-//            @ModelAttribute getScheduleOfTrainerReq req,
-//            @AuthenticationPrincipal PrincipalDetails user
-//    ) {
-//        return reservationService.getScheduleOfTrainer(user.getUser().getId(), trainerId, req);
-//    }
+    /**
+     * 트레이너 예약된 스케줄
+     */
+    @GetMapping("reservations/trainers/{trainerId}")
+    public GetScheduleOfTrainerRes getScheduleOfTrainer(
+            @PathVariable(name = "trainerId") Long trainerId,
+            @ModelAttribute getScheduleOfTrainerReq req,
+            @AuthenticationPrincipal PrincipalDetails user
+    ) {
+        return reservationService.getScheduleOfTrainer(user.getUser().getId(), trainerId, req);
+    }
 
+    /**
+     * 유저 예약 리스트
+     */
+    @GetMapping("reservations")
+    public List<ReservationsRes> reservations(
+            @ModelAttribute ReservationsReq req,
+            @AuthenticationPrincipal PrincipalDetails user
+    ) {
+        return reservationService.reservations(user.getUser().getId(), req);
+    }
 }

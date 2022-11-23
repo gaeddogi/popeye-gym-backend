@@ -47,14 +47,15 @@ public class SecurityConfig {
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new RestAuthenticationEntryPoint()) // 인증되지 않은 사용자의 접근 처리
+                .exceptionHandling()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint()) // 인증되지 않은 사용자의 접근 처리
 //                .accessDeniedHandler(tokenAccessDeniedHandler) // 인가되지 않은 사용자의 접근 처리
 
-//                .and()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/**").permitAll()
-                .antMatchers("/api/v1/**").hasAnyAuthority(Role.ROLE_USER.name())
+                .antMatchers("/api/v1/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.name())
+                .antMatchers("/api/v1/**").hasAnyAuthority(Role.ROLE_USER.name(), Role.ROLE_ADMIN.name())
 
                 .anyRequest().permitAll()
 

@@ -22,7 +22,7 @@ public class PtController {
     private final PtService ptService;
 
     @GetMapping("pts")
-    public List<GetUserPtInfo> getUserPtInfo(
+    public List<GetUserPtInfoRes> getUserPtInfo(
             @AuthenticationPrincipal PrincipalDetails user
     ) {
         return ptService.getUserPtInfo(user.getUser().getId());

@@ -1,9 +1,7 @@
 package com.hy.popeyegym.dto.request;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import com.hy.popeyegym.exception.exceptionType.ReservationType;
+import lombok.*;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -25,6 +23,7 @@ public class ReservationRequestDto {
      * }
      */
     @Getter
+    @ToString
     public static class ReservationReq {
 
         @NotBlank(message = "넘어온 트레이너 id 없음")
@@ -51,13 +50,13 @@ public class ReservationRequestDto {
     @Data
     public static class getScheduleOfTrainerReq {
 
-        private LocalDate startDt;
-        private LocalDate endDt;
+        private LocalDateTime startDt;
+        private LocalDateTime endDt;
 
-        public LocalDate convertStringToLocalDate(String dateStr) {
+        public LocalDateTime convertStringToLocalDate(String dateStr) {
             int[] dateArr = Stream.of(dateStr.split("-")).mapToInt(Integer::parseInt).toArray();
 
-            return LocalDate.of(dateArr[0], dateArr[1], dateArr[2]);
+            return LocalDateTime.of(dateArr[0], dateArr[1], dateArr[2], 0, 0);
         }
 
         public void setStartDt(String startDt) {
@@ -67,6 +66,12 @@ public class ReservationRequestDto {
         public void setEndDt(String endDt) {
             this.endDt = convertStringToLocalDate(endDt);
         }
+    }
+
+    @Data
+    public static class ReservationsReq {
+        private String status;
+        private Long trainerId;
     }
 
 }

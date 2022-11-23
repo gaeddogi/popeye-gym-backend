@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ReservationResponseDto {
@@ -26,10 +27,17 @@ public class ReservationResponseDto {
     @Data
     @Builder
     public static class ScheduleDetails {
-        private LocalDate date;
-        private int time;
+        private Long reservationId;
+        private LocalDateTime dateTime;
+//        private int time;
         private boolean isMine;
     }
 
+    @Data
+    public static class ReservationsRes {
+        private Long reservationId;
+        private LocalDateTime dateTime;
+        private String trainerName;
+    }
 
 }
