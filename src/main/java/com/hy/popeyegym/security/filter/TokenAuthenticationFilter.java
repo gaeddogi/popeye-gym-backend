@@ -39,16 +39,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        User user = null;
-        if (SecurityContextHolder.getContext().getAuthentication() != null) {
-            PrincipalDetails principal = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            user = principal.getUser();
-
-        }
-
-        log.info("user: {}", user);
+//        User user = null;
+//        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+//            PrincipalDetails principal = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            user = principal.getUser();
+//
+//        }
+//
+//        log.info("user: {}", user);
         log.info("request uri: {}", request.getRequestURI());
-        log.info("isSame: {}", request.getRequestURI().equals("/api/v1/auth/reissue"));
+//        log.info("isSame: {}", request.getRequestURI().equals("/api/v1/auth/reissue"));
 
         String token = HeaderUtils.getAccessToken(request);
 
