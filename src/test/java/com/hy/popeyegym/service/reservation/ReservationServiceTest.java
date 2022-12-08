@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+//@SpringBootTest
 class ReservationServiceTest {
 
     @Autowired
