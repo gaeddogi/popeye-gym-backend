@@ -14,7 +14,7 @@ spring:
         format_sql: true
 
   redis:
-    host: 54.180.80.223
+    host: 43.201.99.86
     port: 6379
 
 
@@ -36,7 +36,7 @@ spring:
               - name
               - email
             client-name: Naver
-            redirect-uri: http://13.124.76.254:8080/login/oauth2/code/naver
+            redirect-uri: http://13.125.127.2:8080/login/oauth2/code/naver
             authorization-grant-type: authorization_code
           kakao:
             client-id: 33204fc5cbdce28928ebbae5ec3b3870
@@ -44,7 +44,7 @@ spring:
               - profile_nickname
               - account_email
             client-name: Kakao
-            redirect-uri: http://13.124.76.254:8080/login/oauth2/code/kakao
+            redirect-uri: http://13.125.127.2:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST
         # Provider ??
@@ -66,7 +66,7 @@ spring:
     refresh_token_expire_time: 604800000 #7일
 
   oauth2:
-    redirect_uri: http://13.124.76.254:8080/oauth2/redirect
+    redirect_uri: http://13.125.127.2:8080/oauth2/redirect
 
 logging:
   level:
