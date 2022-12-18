@@ -1,13 +1,13 @@
 package com.hy.popeyegym.security.handler;
 
-import com.hy.popeyegym.domain.user.UserRefreshToken;
+import com.hy.popeyegym.web.domain.user.UserRefreshToken;
 import com.hy.popeyegym.exception.CustomException;
 import com.hy.popeyegym.exception.exceptionType.AuthExceptionType;
-import com.hy.popeyegym.repository.user.UserRefreshTokenRepository;
+import com.hy.popeyegym.web.repository.user.UserRefreshTokenRepository;
 import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.repository.OAuth2AuthorizationRequestBaseOnCookieRepository;
 import com.hy.popeyegym.security.util.CookieUtils;
-import com.hy.popeyegym.token.JwtTokenProvider;
+import com.hy.popeyegym.security.token.JwtTokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

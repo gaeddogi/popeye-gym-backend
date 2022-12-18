@@ -2,7 +2,7 @@ package com.hy.popeyegym.security.filter;
 
 import com.hy.popeyegym.security.service.PrincipalOAuth2UserService;
 import com.hy.popeyegym.security.util.HeaderUtils;
-import com.hy.popeyegym.token.JwtTokenProvider;
+import com.hy.popeyegym.security.token.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

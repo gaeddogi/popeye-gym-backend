@@ -1,10 +1,10 @@
 package com.hy.popeyegym.security.service;
 
-import com.hy.popeyegym.domain.user.User;
+import com.hy.popeyegym.web.domain.user.User;
 import com.hy.popeyegym.exception.CustomException;
 import com.hy.popeyegym.exception.exceptionType.AuthExceptionType;
 import com.hy.popeyegym.exception.exceptionType.UserExceptionType;
-import com.hy.popeyegym.repository.user.UserRepository;
+import com.hy.popeyegym.web.repository.user.UserRepository;
 import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.provider.GoogleOAuth2UserInfo;
 import com.hy.popeyegym.security.provider.KakaoOAuth2UserInfo;

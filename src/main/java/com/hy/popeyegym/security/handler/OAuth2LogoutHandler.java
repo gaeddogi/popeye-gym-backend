@@ -1,8 +1,8 @@
 package com.hy.popeyegym.security.handler;
 
-import com.hy.popeyegym.repository.user.UserRefreshTokenRepository;
+import com.hy.popeyegym.web.repository.user.UserRefreshTokenRepository;
 import com.hy.popeyegym.security.util.HeaderUtils;
-import com.hy.popeyegym.token.JwtTokenProvider;
+import com.hy.popeyegym.security.token.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,6 +1,6 @@
 package com.hy.popeyegym.security;
 
-import com.hy.popeyegym.domain.user.User;
+import com.hy.popeyegym.web.domain.user.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

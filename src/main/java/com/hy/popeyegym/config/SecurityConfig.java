@@ -1,6 +1,6 @@
 package com.hy.popeyegym.config;
 
-import com.hy.popeyegym.domain.user.Role;
+import com.hy.popeyegym.web.domain.user.Role;
 import com.hy.popeyegym.security.filter.JwtExceptionFilter;
 import com.hy.popeyegym.security.handler.OAuth2AuthenticationSuccessHandler;
 import com.hy.popeyegym.security.handler.OAuth2LogoutHandler;
@@ -8,7 +8,7 @@ import com.hy.popeyegym.security.handler.RestAuthenticationEntryPoint;
 import com.hy.popeyegym.security.repository.OAuth2AuthorizationRequestBaseOnCookieRepository;
 import com.hy.popeyegym.security.service.PrincipalOAuth2UserService;
 import com.hy.popeyegym.security.filter.TokenAuthenticationFilter;
-import com.hy.popeyegym.token.JwtTokenProvider;
+import com.hy.popeyegym.security.token.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
