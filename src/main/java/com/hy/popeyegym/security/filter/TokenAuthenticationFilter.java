@@ -1,7 +1,5 @@
 package com.hy.popeyegym.security.filter;
 
-import com.hy.popeyegym.domain.user.User;
-import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.service.PrincipalOAuth2UserService;
 import com.hy.popeyegym.security.util.HeaderUtils;
 import com.hy.popeyegym.token.JwtTokenProvider;
@@ -9,11 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 

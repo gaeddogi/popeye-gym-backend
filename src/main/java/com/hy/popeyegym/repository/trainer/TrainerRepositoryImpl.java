@@ -1,8 +1,6 @@
 package com.hy.popeyegym.repository.trainer;
 
-import com.hy.popeyegym.domain.trainer.QTrainer;
 import com.hy.popeyegym.domain.trainer.TrainerType;
-import com.hy.popeyegym.dto.response.TrainerResponseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -13,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-import static com.hy.popeyegym.domain.trainer.QTrainer.*;
-import static com.hy.popeyegym.dto.response.TrainerResponseDto.*;
+import static com.hy.popeyegym.domain.trainer.QTrainer.trainer;
+import static com.hy.popeyegym.dto.response.TrainerResponseDto.GetTrainerAllRes;
 
 @RequiredArgsConstructor
 public class TrainerRepositoryImpl implements TrainerRepositoryCustom{

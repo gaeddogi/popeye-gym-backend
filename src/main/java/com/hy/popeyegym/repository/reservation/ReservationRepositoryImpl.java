@@ -1,11 +1,7 @@
 package com.hy.popeyegym.repository.reservation;
 
-import com.hy.popeyegym.domain.reservation.QReservation;
 import com.hy.popeyegym.domain.reservation.Reservation;
 import com.hy.popeyegym.domain.reservation.ReservationStatus;
-import com.hy.popeyegym.domain.trainer.QTrainer;
-import com.hy.popeyegym.domain.trainer.Trainer;
-import com.hy.popeyegym.dto.response.ReservationResponseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -14,15 +10,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
-import static com.hy.popeyegym.domain.reservation.QReservation.*;
-import static com.hy.popeyegym.domain.trainer.QTrainer.*;
-import static com.hy.popeyegym.dto.response.ReservationResponseDto.*;
+import static com.hy.popeyegym.domain.reservation.QReservation.reservation;
+import static com.hy.popeyegym.domain.trainer.QTrainer.trainer;
+import static com.hy.popeyegym.dto.response.ReservationResponseDto.ReservationsRes;
 
 @RequiredArgsConstructor
 public class ReservationRepositoryImpl implements ReservationRepositoryCustom{

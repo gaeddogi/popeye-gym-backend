@@ -1,7 +1,7 @@
 package com.hy.popeyegym.security.provider;
 
-import com.hy.popeyegym.domain.user.Role;
 import com.hy.popeyegym.domain.user.AuthProvider;
+import com.hy.popeyegym.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;

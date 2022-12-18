@@ -1,12 +1,8 @@
 package com.hy.popeyegym.repository.pt;
 
-import com.hy.popeyegym.domain.trainer.Trainer;
-import com.hy.popeyegym.dto.response.PtResponseDto;
-import com.querydsl.core.Tuple;
-
 import java.util.List;
 
-import static com.hy.popeyegym.dto.response.PtResponseDto.*;
+import static com.hy.popeyegym.dto.response.PtResponseDto.GetUserPtInfoRes;
 
 public interface PtRepositoryCustom {
 

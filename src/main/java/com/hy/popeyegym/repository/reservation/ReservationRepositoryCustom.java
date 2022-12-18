@@ -1,16 +1,13 @@
 package com.hy.popeyegym.repository.reservation;
 
 import com.hy.popeyegym.domain.reservation.Reservation;
-import com.hy.popeyegym.dto.response.ReservationResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
-import static com.hy.popeyegym.dto.response.ReservationResponseDto.*;
+import static com.hy.popeyegym.dto.response.ReservationResponseDto.ReservationsRes;
 
 public interface ReservationRepositoryCustom {
 

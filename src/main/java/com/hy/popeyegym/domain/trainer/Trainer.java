@@ -1,14 +1,11 @@
 package com.hy.popeyegym.domain.trainer;
 
-import com.hy.popeyegym.domain.enroll.Enroll;
-import com.hy.popeyegym.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter

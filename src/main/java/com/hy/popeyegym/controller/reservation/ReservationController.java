@@ -1,7 +1,5 @@
 package com.hy.popeyegym.controller.reservation;
 
-import com.hy.popeyegym.dto.response.EnrollResponseDto;
-import com.hy.popeyegym.dto.response.ReservationResponseDto;
 import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -9,16 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDate;
-import java.util.List;
 
 import static com.hy.popeyegym.dto.request.ReservationRequestDto.*;
 import static com.hy.popeyegym.dto.response.ReservationResponseDto.*;

@@ -3,7 +3,6 @@ package com.hy.popeyegym.dto.request;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 public class EnrollRequestDto {
 

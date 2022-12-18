@@ -3,9 +3,6 @@ package com.hy.popeyegym.security.filter;
 import com.hy.popeyegym.exception.CustomException;
 import com.hy.popeyegym.exception.ErrorResponse;
 import com.hy.popeyegym.exception.exceptionType.ExceptionType;
-import com.hy.popeyegym.exception.exceptionType.JwtExceptionType;
-import io.jsonwebtoken.JwtException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 

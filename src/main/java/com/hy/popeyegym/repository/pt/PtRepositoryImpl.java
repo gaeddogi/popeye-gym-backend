@@ -1,14 +1,6 @@
 package com.hy.popeyegym.repository.pt;
 
-import com.hy.popeyegym.domain.pt.QPt;
-import com.hy.popeyegym.domain.reservation.QReservation;
 import com.hy.popeyegym.domain.reservation.ReservationStatus;
-import com.hy.popeyegym.domain.trainer.QTrainer;
-import com.hy.popeyegym.domain.trainer.Trainer;
-import com.hy.popeyegym.domain.user.QUser;
-import com.hy.popeyegym.dto.response.PtResponseDto;
-import com.hy.popeyegym.exception.exceptionType.ReservationType;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,11 +9,11 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.hy.popeyegym.domain.pt.QPt.*;
-import static com.hy.popeyegym.domain.reservation.QReservation.*;
-import static com.hy.popeyegym.domain.trainer.QTrainer.*;
-import static com.hy.popeyegym.domain.user.QUser.*;
-import static com.hy.popeyegym.dto.response.PtResponseDto.*;
+import static com.hy.popeyegym.domain.pt.QPt.pt;
+import static com.hy.popeyegym.domain.reservation.QReservation.reservation;
+import static com.hy.popeyegym.domain.trainer.QTrainer.trainer;
+import static com.hy.popeyegym.domain.user.QUser.user;
+import static com.hy.popeyegym.dto.response.PtResponseDto.GetUserPtInfoRes;
 
 @RequiredArgsConstructor
 public class PtRepositoryImpl implements PtRepositoryCustom {

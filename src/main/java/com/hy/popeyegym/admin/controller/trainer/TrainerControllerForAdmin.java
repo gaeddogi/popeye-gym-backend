@@ -4,17 +4,17 @@ import com.hy.popeyegym.service.trainer.TrainerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
-import static com.hy.popeyegym.dto.request.TrainerRequestDto.*;
-import static com.hy.popeyegym.dto.response.TrainerResponseDto.*;
+import static com.hy.popeyegym.dto.request.TrainerRequestDto.EnrollReq;
+import static com.hy.popeyegym.dto.request.TrainerRequestDto.GetTrainerAllReq;
+import static com.hy.popeyegym.dto.response.TrainerResponseDto.EnrollRes;
+import static com.hy.popeyegym.dto.response.TrainerResponseDto.GetTrainerAllRes;
 
 @RestController
 @RequiredArgsConstructor

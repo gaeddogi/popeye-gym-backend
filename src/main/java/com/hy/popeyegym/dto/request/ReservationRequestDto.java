@@ -1,17 +1,11 @@
 package com.hy.popeyegym.dto.request;
 
-import com.hy.popeyegym.exception.exceptionType.ReservationType;
-import lombok.*;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ReservationRequestDto {

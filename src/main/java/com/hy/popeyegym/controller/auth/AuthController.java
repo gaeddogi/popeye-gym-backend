@@ -1,22 +1,17 @@
 package com.hy.popeyegym.controller.auth;
 
-import com.hy.popeyegym.dto.response.AuthResponseDto;
-import com.hy.popeyegym.exception.CustomException;
-import com.hy.popeyegym.exception.exceptionType.AuthExceptionType;
-import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.util.HeaderUtils;
 import com.hy.popeyegym.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.hy.popeyegym.dto.response.AuthResponseDto.*;
+import static com.hy.popeyegym.dto.response.AuthResponseDto.ReissueRes;
 
 @Slf4j
 @RestController

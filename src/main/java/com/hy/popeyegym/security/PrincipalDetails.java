@@ -8,9 +8,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Data
 public class PrincipalDetails implements OAuth2User, UserDetails {

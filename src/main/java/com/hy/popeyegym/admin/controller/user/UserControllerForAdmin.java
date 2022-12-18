@@ -1,18 +1,16 @@
 package com.hy.popeyegym.admin.controller.user;
 
-import com.hy.popeyegym.dto.request.UserRequestDto;
 import com.hy.popeyegym.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-import static com.hy.popeyegym.dto.request.UserRequestDto.*;
-import static com.hy.popeyegym.dto.response.UserResponseDto.*;
+import static com.hy.popeyegym.dto.response.UserResponseDto.GetUserAllRes;
 
 @RestController
 @RequiredArgsConstructor

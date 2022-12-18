@@ -1,12 +1,8 @@
 package com.hy.popeyegym.dto.response;
 
 import com.hy.popeyegym.domain.user.Role;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import net.bytebuddy.implementation.bind.annotation.BindingPriority;
-
-import java.util.List;
 
 public class UserResponseDto {
 

@@ -1,9 +1,6 @@
 package com.hy.popeyegym.security.handler;
 
-import com.hy.popeyegym.config.AppProperties;
-import com.hy.popeyegym.domain.user.User;
 import com.hy.popeyegym.domain.user.UserRefreshToken;
-import com.hy.popeyegym.dto.response.TokenResponseDto;
 import com.hy.popeyegym.exception.CustomException;
 import com.hy.popeyegym.exception.exceptionType.AuthExceptionType;
 import com.hy.popeyegym.repository.user.UserRefreshTokenRepository;
@@ -11,13 +8,9 @@ import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.security.repository.OAuth2AuthorizationRequestBaseOnCookieRepository;
 import com.hy.popeyegym.security.util.CookieUtils;
 import com.hy.popeyegym.token.JwtTokenProvider;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,7 +23,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
-import static com.hy.popeyegym.dto.response.TokenResponseDto.*;
 import static com.hy.popeyegym.security.repository.OAuth2AuthorizationRequestBaseOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 @Slf4j

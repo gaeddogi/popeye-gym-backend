@@ -1,7 +1,5 @@
 package com.hy.popeyegym.repository.user;
 
-import com.hy.popeyegym.domain.user.QUser;
-import com.hy.popeyegym.dto.response.UserResponseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -12,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-import static com.hy.popeyegym.domain.user.QUser.*;
-import static com.hy.popeyegym.dto.response.UserResponseDto.*;
+import static com.hy.popeyegym.domain.user.QUser.user;
+import static com.hy.popeyegym.dto.response.UserResponseDto.GetUserAllRes;
 
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepositoryCustom {

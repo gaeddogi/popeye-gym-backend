@@ -1,10 +1,8 @@
 package com.hy.popeyegym.repository.enroll;
 
-import com.hy.popeyegym.dto.response.EnrollResponseDto;
-
 import java.util.List;
 
-import static com.hy.popeyegym.dto.response.EnrollResponseDto.*;
+import static com.hy.popeyegym.dto.response.EnrollResponseDto.GetTrainersRes;
 
 public interface EnrollRepositoryCustom {
 
