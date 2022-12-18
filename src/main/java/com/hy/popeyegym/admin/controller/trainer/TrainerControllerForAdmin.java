@@ -2,6 +2,10 @@ package com.hy.popeyegym.admin.controller.trainer;
 
 import com.hy.popeyegym.service.trainer.TrainerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,10 +39,11 @@ public class TrainerControllerForAdmin {
     }
 
     @GetMapping("/trainers")
-    public List<GetTrainerAllRes> trainerAll(
-            @ModelAttribute GetTrainerAllReq req
+    public Page<GetTrainerAllRes> trainerAll(
+            @ModelAttribute GetTrainerAllReq req,
+            @PageableDefault(size = 7) Pageable pageable
     ) {
-        return trainerService.getTrainerAll(req);
+        return trainerService.getTrainerAll(req, pageable);
     }
 
 }

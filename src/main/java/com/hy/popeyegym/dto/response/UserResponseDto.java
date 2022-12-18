@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import net.bytebuddy.implementation.bind.annotation.BindingPriority;
 
+import java.util.List;
+
 public class UserResponseDto {
 
     @Data
@@ -20,6 +22,13 @@ public class UserResponseDto {
         private Long id;
         private String email;
     }
+
+
+//    @Data
+//    public static class User {
+//        private Long id;
+//        private String email;
+//    }
 
 
 }

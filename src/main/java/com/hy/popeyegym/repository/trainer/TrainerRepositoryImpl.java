@@ -7,6 +7,9 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class TrainerRepositoryImpl implements TrainerRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<GetTrainerAllRes> getTrainerAllRes(String nameParam, TrainerType type) {
+    public Page<GetTrainerAllRes> getTrainerAllRes(String nameParam, TrainerType type, Pageable pageable) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
 
         if (type != null) {
@@ -29,7 +32,7 @@ public class TrainerRepositoryImpl implements TrainerRepositoryCustom{
             booleanBuilder.and(trainer.name.contains(nameParam));
         }
 
-        return queryFactory
+        List<GetTrainerAllRes> contents = queryFactory
                 .select(Projections.fields(GetTrainerAllRes.class,
                         trainer.id,
                         trainer.name,
@@ -37,7 +40,17 @@ public class TrainerRepositoryImpl implements TrainerRepositoryCustom{
                 ))
                 .from(trainer)
                 .where(booleanBuilder)
-                .orderBy( trainer.type.asc(), trainer.name.asc())
+                .orderBy(trainer.type.asc(), trainer.name.asc())
+                .limit(pageable.getPageSize())
+                .offset(pageable.getOffset())
                 .fetch();
+
+        Long total = queryFactory
+                .select(trainer.count())
+                .from(trainer)
+                .where(booleanBuilder)
+                .fetchOne();
+
+        return new PageImpl<>(contents, pageable, total);
     }
 }

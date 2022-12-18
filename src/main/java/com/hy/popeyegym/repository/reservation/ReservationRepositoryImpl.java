@@ -10,6 +10,9 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,7 +56,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
     }
 
     @Override
-    public List<ReservationsRes> getReservations(Long userId, String status, Long trainerId) {
+    public Page<ReservationsRes> getReservations(Long userId, String status, Long trainerId, Pageable pageable) {
         BooleanBuilder builder = new BooleanBuilder();
 
         builder.and(reservation.user.id.eq(userId));
@@ -73,7 +76,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
             builder.and(reservation.trainer.id.eq(trainerId));
         }
 
-        return jpaQueryFactory
+        List<ReservationsRes> contents = jpaQueryFactory
                 .select(Projections.fields(
                         ReservationsRes.class,
                         reservation.id.as("reservationId"),
@@ -84,7 +87,17 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
                 .join(reservation.trainer, trainer)
                 .where(builder)
                 .orderBy(reservation.dateTime.desc())
+                .limit(pageable.getPageSize())
+                .offset(pageable.getOffset())
                 .fetch();
+
+        Long total = jpaQueryFactory
+                .select(reservation.count())
+                .from(reservation)
+                .where(builder)
+                .fetchOne();
+
+        return new PageImpl<>(contents, pageable, total);
     }
 
 

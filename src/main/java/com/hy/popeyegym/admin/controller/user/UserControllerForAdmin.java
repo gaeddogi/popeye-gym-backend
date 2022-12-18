@@ -1,13 +1,17 @@
 package com.hy.popeyegym.admin.controller.user;
 
+import com.hy.popeyegym.dto.request.UserRequestDto;
 import com.hy.popeyegym.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.hy.popeyegym.dto.request.UserRequestDto.*;
 import static com.hy.popeyegym.dto.response.UserResponseDto.*;
 
 @RestController
@@ -18,9 +22,10 @@ public class UserControllerForAdmin {
     private final UserService userService;
 
     @GetMapping("users")
-    public List<GetUserAllRes> getUserAll(
-            String emailParam
+    public Page<GetUserAllRes> getUserAll(
+            String emailParam,
+            @PageableDefault(sort = {"email"}, direction = Sort.Direction.ASC, size = 7) Pageable pageable
     ) {
-        return userService.getUserAll(emailParam);
+        return userService.getUserAll(emailParam, pageable);
     }
 }

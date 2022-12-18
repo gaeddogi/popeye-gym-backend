@@ -29,4 +29,21 @@ public class UserRequestDto {
 
     }
 
+    @Data
+    public static class UserSearchReq {
+
+        private String emailParam;
+        private int page;
+    }
+
+    // int currentPage; 사용자가 요청한 값 -> 1
+    // int totalCount; db에서 가져옴 ->  100개
+    // int limit; 한 페이지 당 10개
+
+    // int startPage;  Math.floor(cp-1 / barSize)  * barSize + 1
+    // int endPage; startPage -1 + barSize
+    // int barSize;
+
+    // int first; 무조건 1
+    // int last; Math.ceil(totalCount / limit)
 }

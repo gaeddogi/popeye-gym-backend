@@ -14,6 +14,8 @@ import com.hy.popeyegym.repository.trainer.TrainerRepository;
 import com.hy.popeyegym.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -133,7 +135,7 @@ public class ReservationService {
     }
 
 
-    public List<ReservationsRes> reservations(Long id, ReservationsReq req) {
-        return reservationRepository.getReservations(id, req.getStatus(), req.getTrainerId());
+    public Page<ReservationsRes> reservations(Long id, ReservationsReq req, Pageable pageable) {
+        return reservationRepository.getReservations(id, req.getStatus(), req.getTrainerId(), pageable);
     }
 }

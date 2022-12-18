@@ -2,6 +2,8 @@ package com.hy.popeyegym.repository.reservation;
 
 import com.hy.popeyegym.domain.reservation.Reservation;
 import com.hy.popeyegym.dto.response.ReservationResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +18,7 @@ public interface ReservationRepositoryCustom {
 
     List<Reservation> getSchedulesOfDate(Long trainerId, LocalDateTime dateTime);
 
-    List<ReservationsRes> getReservations(Long userId, String status, Long trainerId);
+    Page<ReservationsRes> getReservations(Long userId, String status, Long trainerId, Pageable pageable);
 
 //    List<Reservation> getReservationAfterNow(Long reservationId, Long userId);
 }

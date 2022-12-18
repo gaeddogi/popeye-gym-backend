@@ -5,6 +5,10 @@ import com.hy.popeyegym.dto.response.ReservationResponseDto;
 import com.hy.popeyegym.security.PrincipalDetails;
 import com.hy.popeyegym.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -78,10 +82,11 @@ public class ReservationController {
      * 유저 예약 리스트
      */
     @GetMapping("reservations")
-    public List<ReservationsRes> reservations(
+    public Page<ReservationsRes> reservations(
             @ModelAttribute ReservationsReq req,
-            @AuthenticationPrincipal PrincipalDetails user
-    ) {
-        return reservationService.reservations(user.getUser().getId(), req);
+            @AuthenticationPrincipal PrincipalDetails user,
+            @PageableDefault(sort = {"dataTime"}, direction = Sort.Direction.DESC, size = 7) Pageable pageable
+            ) {
+        return reservationService.reservations(user.getUser().getId(), req, pageable);
     }
 }
