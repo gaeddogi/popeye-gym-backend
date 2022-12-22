@@ -42,21 +42,17 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .cors().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //session 사용 안함
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint()) // 인증되지 않은 사용자의 접근 처리
-//                .accessDeniedHandler(tokenAccessDeniedHandler) // 인가되지 않은 사용자의 접근 처리
-
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/api/v1/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.name())
                 .antMatchers("/api/v1/**").hasAnyAuthority(Role.ROLE_USER.name(), Role.ROLE_ADMIN.name())
-
                 .anyRequest().permitAll()
 
                 //oauth2 설정
@@ -65,31 +61,27 @@ public class SecurityConfig {
                 .authorizationEndpoint()
                 .baseUri("/oauth2/authorization") // provider 로그인 폼으로 가는 uri
                 .authorizationRequestRepository(authorizationRequestRepository)
-
                 .and()
                 .redirectionEndpoint()
-                .baseUri("/*/oauth2/code/*") // 구글 로그인 인증 후 리다이렉트 되는 내 서버 uri
-
+                .baseUri("/*/oauth2/code/*") // 로그인 인증 후 리다이렉트 되는 내 서버 uri
                 .and()
                 .userInfoEndpoint()
                 .userService(principalOAuth2UserService) // 받은 사용자 정보를 후처리 하는 곳
-
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler)  // 인증 후 서비스까지 간 후 successHandler 호출
-//                .failureHandler(oAuth2AuthenticationFailureHandler()) // 구글회원 인증 실패 시 리다이렉트 후 error 발생 -> failureHandler 호출
 
                 .and()
                 .logout()
                 .logoutUrl("/api/v1/logout")
                 .permitAll()
-                .addLogoutHandler(auth2LogoutHandler)
+                .addLogoutHandler(auth2LogoutHandler) // 로그아웃 처리 핸들러
                 .logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
                     httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                })
+                }) // 로그아웃 성공 후 응답
 
                 .and()
-                .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(jwtExceptionFilter, ForceEagerSessionCreationFilter.class);
+                .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class) // JWT 로그인 처리 필터
+                .addFilterBefore(jwtExceptionFilter, ForceEagerSessionCreationFilter.class); // 필터에서 발생하는 에러 처리 필터
         return http.build();
     }
 

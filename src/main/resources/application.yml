@@ -12,6 +12,11 @@ spring:
         default_batch_fetch_size: 100
         format_sql: true
 
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+
   # jwt
   jwt:
     secret: aXQncyB2ZXJ5IGxvbmcgbG9uZyBsb25nIHNlY3JldCBrZXk= # it's very long long long secret key

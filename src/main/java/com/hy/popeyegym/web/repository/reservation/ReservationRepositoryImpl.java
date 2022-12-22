@@ -18,7 +18,7 @@ import static com.hy.popeyegym.web.domain.trainer.QTrainer.trainer;
 import static com.hy.popeyegym.web.dto.response.ReservationResponseDto.ReservationsRes;
 
 @RequiredArgsConstructor
-public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
+public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 

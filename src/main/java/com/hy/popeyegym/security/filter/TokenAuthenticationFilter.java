@@ -44,7 +44,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 //
 //        log.info("user: {}", user);
         log.info("request uri: {}", request.getRequestURI());
-//        log.info("isSame: {}", request.getRequestURI().equals("/api/v1/auth/reissue"));
 
         String token = HeaderUtils.getAccessToken(request);
 
