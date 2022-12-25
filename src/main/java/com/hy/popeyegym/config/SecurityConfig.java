@@ -1,20 +1,21 @@
 package com.hy.popeyegym.config;
 
-import com.hy.popeyegym.web.domain.user.Role;
 import com.hy.popeyegym.security.filter.JwtExceptionFilter;
+import com.hy.popeyegym.security.filter.TokenAuthenticationFilter;
 import com.hy.popeyegym.security.handler.OAuth2AuthenticationSuccessHandler;
 import com.hy.popeyegym.security.handler.OAuth2LogoutHandler;
 import com.hy.popeyegym.security.handler.RestAuthenticationEntryPoint;
 import com.hy.popeyegym.security.repository.OAuth2AuthorizationRequestBaseOnCookieRepository;
 import com.hy.popeyegym.security.service.PrincipalOAuth2UserService;
-import com.hy.popeyegym.security.filter.TokenAuthenticationFilter;
 import com.hy.popeyegym.security.token.JwtTokenProvider;
+import com.hy.popeyegym.web.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -37,8 +38,23 @@ public class SecurityConfig {
     private final OAuth2LogoutHandler auth2LogoutHandler;
     private final RedisTemplate redisTemplate;
 
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/assets/**", "/swagger-ui/**/*",
+                "/v3/api-docs", "/swagger-resources/**/*");
+
+
+        // swagger
+//        web.ignoring().antMatchers(
+//                "/v2/api-docs",  "/configuration/ui",
+//                "/swagger-resources", "/configuration/security",
+//                "/swagger-ui.html", "/webjars/**","/swagger/**");
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf().disable()
                 .cors().disable()
@@ -50,7 +66,7 @@ public class SecurityConfig {
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint()) // 인증되지 않은 사용자의 접근 처리
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
+                .antMatchers("/api/v1/auth/**", "swagger-ui/**/*", "/swagger-resources/**").permitAll()
                 .antMatchers("/api/v1/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.name())
                 .antMatchers("/api/v1/**").hasAnyAuthority(Role.ROLE_USER.name(), Role.ROLE_ADMIN.name())
                 .anyRequest().permitAll()
