@@ -101,7 +101,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     /**
      * 토큰 필터
      */
